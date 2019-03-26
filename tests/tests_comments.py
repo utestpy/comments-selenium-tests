@@ -1,3 +1,4 @@
+from lib.web.connection.browser import Browser
 from lib.web.pages import (
     NewCommentPage,
     DuplicateCommentPage,
@@ -5,9 +6,11 @@ from lib.web.pages import (
     EditCommentPage,
 )
 from lib.web.elements import CommentsTable
+from tests.markers import TestType
 
 
-def test_new_comment(browser):
+@TestType.smoke
+def test_new_comment(browser: Browser) -> None:
     new_comment_page = NewCommentPage(browser)
     new_comment_page.open()
     new_comment_page.enter_comment_text("Test comment 30")
@@ -18,7 +21,8 @@ def test_new_comment(browser):
     assert comments_table.check_if_comment_is_present("Test comment 30")
 
 
-def test_duplicate(browser):
+@TestType.smoke
+def test_duplicate(browser: Browser) -> None:
     duplicate_comment_page = DuplicateCommentPage(browser, 1)
     duplicate_comment_page.open()
     duplicate_comment_page.clear_number_field()
@@ -28,7 +32,8 @@ def test_duplicate(browser):
     assert comments_table.check_if_comment_is_present("Copy of Comment Text 1")
 
 
-def test_edit(browser):
+@TestType.smoke
+def test_edit(browser: Browser) -> None:
     edit_comment_page = EditCommentPage(browser, 3)
     edit_comment_page.open()
     edit_comment_page.edit_comment("Edited comment")
@@ -36,7 +41,8 @@ def test_edit(browser):
     assert CommentsTable(browser).check_if_comment_is_present("Edited comment")
 
 
-def test_delete_one_comment(browser):
+@TestType.smoke
+def test_delete_one_comment(browser: Browser) -> None:
     main_page = MainPage(browser)
     main_page.open()
     main_page.delete(2)
@@ -44,7 +50,8 @@ def test_delete_one_comment(browser):
     assert not comments_table.check_if_comment_is_present("Comment Text 3")
 
 
-def test_delete_few_comments(browser):
+@TestType.smoke
+def test_delete_few_comments(browser: Browser) -> None:
     main_page = MainPage(browser)
     main_page.open()
     main_page.delete(2, 3)
@@ -55,14 +62,16 @@ def test_delete_few_comments(browser):
     )
 
 
-def test_activate_one_comment(browser):
+@TestType.smoke
+def test_activate_one_comment(browser: Browser) -> None:
     main_page = MainPage(browser)
     main_page.open()
     main_page.select_action().activate(1)
     assert CommentsTable(browser).check_if_the_comment_is_active(1)
 
 
-def test_activate_few_comments(browser):
+@TestType.smoke
+def test_activate_few_comments(browser: Browser) -> None:
     main_page = MainPage(browser)
     main_page.open()
     main_page.select_action().activate(1, 3)
@@ -72,14 +81,16 @@ def test_activate_few_comments(browser):
     ) and comments_table.check_if_the_comment_is_active(3)
 
 
-def test_inactivate_one_comment(browser):
+@TestType.smoke
+def test_inactivate_one_comment(browser: Browser) -> None:
     main_page = MainPage(browser)
     main_page.open()
     main_page.select_action().inactivate(1)
     assert CommentsTable(browser).check_if_comment_is_inactive(1)
 
 
-def test_inactivate_few_comments(browser):
+@TestType.smoke
+def test_inactivate_few_comments(browser: Browser) -> None:
     main_page = MainPage(browser)
     main_page.open()
     main_page.select_action().inactivate(1, 3)

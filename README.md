@@ -1,8 +1,22 @@
 # Selenium web ui tests with python POM model
 Contains web ui tests using POM most popular OOD pattern for Web UI automation using python programming language.
 
-## Contributing
+## Run automated tests
+From the root directory of your shell run next command
+- Smoke tests
+```bash
+~ ./run-tests smoke
+```
+- Unittest tests
+```bash
+./run-tests unittest
+```
+- All tests
+```bash
+~ ./run-tests all
+```
 
+## Contributing
 - clone the repository
 - configure Git for the first time after cloning with your name and email
   ```bash

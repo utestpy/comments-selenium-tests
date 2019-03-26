@@ -1,4 +1,3 @@
-"""Module contains browser fixture."""
 from pytest import fixture
 from lib.web.connection.browser import Browser
 
