@@ -1,5 +1,8 @@
 #!/bin/bash
 
+TESTS_DIR='tests/'
+
+
 clear_trash(){
     local trash='.pytest_cache'
     [[ -d "$trash" ]] && echo "removing ${trash} testing trash" && rm -rf ${trash} && echo "environment is cleared"
@@ -7,12 +10,17 @@ clear_trash(){
 
 
 function smoke {
-    pytest -v -m smoke tests/
+    pytest -m smoke ${TESTS_DIR}
+}
+
+
+function unittest {
+    pytest -m unittest ${TESTS_DIR}
 }
 
 
 function all {
-    pytest -v tests/
+    pytest tests/
 }
 
 

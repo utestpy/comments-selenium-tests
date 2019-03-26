@@ -6,10 +6,10 @@ from lib.web.pages import (
     EditCommentPage,
 )
 from lib.web.elements import CommentsTable
-from tests.markers import TestType
+from tests.tags import Tag
 
 
-@TestType.smoke
+@Tag.from_name(tag_type='smoke')
 def test_new_comment(browser: Browser) -> None:
     new_comment_page = NewCommentPage(browser)
     new_comment_page.open()
@@ -21,7 +21,7 @@ def test_new_comment(browser: Browser) -> None:
     assert comments_table.check_if_comment_is_present("Test comment 30")
 
 
-@TestType.smoke
+@Tag.from_name(tag_type='smoke')
 def test_duplicate(browser: Browser) -> None:
     duplicate_comment_page = DuplicateCommentPage(browser, 1)
     duplicate_comment_page.open()
@@ -32,7 +32,7 @@ def test_duplicate(browser: Browser) -> None:
     assert comments_table.check_if_comment_is_present("Copy of Comment Text 1")
 
 
-@TestType.smoke
+@Tag.from_name(tag_type='smoke')
 def test_edit(browser: Browser) -> None:
     edit_comment_page = EditCommentPage(browser, 3)
     edit_comment_page.open()
@@ -41,7 +41,7 @@ def test_edit(browser: Browser) -> None:
     assert CommentsTable(browser).check_if_comment_is_present("Edited comment")
 
 
-@TestType.smoke
+@Tag.from_name(tag_type='smoke')
 def test_delete_one_comment(browser: Browser) -> None:
     main_page = MainPage(browser)
     main_page.open()
@@ -50,7 +50,7 @@ def test_delete_one_comment(browser: Browser) -> None:
     assert not comments_table.check_if_comment_is_present("Comment Text 3")
 
 
-@TestType.smoke
+@Tag.from_name(tag_type='smoke')
 def test_delete_few_comments(browser: Browser) -> None:
     main_page = MainPage(browser)
     main_page.open()
@@ -62,7 +62,7 @@ def test_delete_few_comments(browser: Browser) -> None:
     )
 
 
-@TestType.smoke
+@Tag.from_name(tag_type='smoke')
 def test_activate_one_comment(browser: Browser) -> None:
     main_page = MainPage(browser)
     main_page.open()
@@ -70,7 +70,7 @@ def test_activate_one_comment(browser: Browser) -> None:
     assert CommentsTable(browser).check_if_the_comment_is_active(1)
 
 
-@TestType.smoke
+@Tag.from_name(tag_type='smoke')
 def test_activate_few_comments(browser: Browser) -> None:
     main_page = MainPage(browser)
     main_page.open()
@@ -81,7 +81,7 @@ def test_activate_few_comments(browser: Browser) -> None:
     ) and comments_table.check_if_the_comment_is_active(3)
 
 
-@TestType.smoke
+@Tag.from_name(tag_type='smoke')
 def test_inactivate_one_comment(browser: Browser) -> None:
     main_page = MainPage(browser)
     main_page.open()
@@ -89,7 +89,7 @@ def test_inactivate_one_comment(browser: Browser) -> None:
     assert CommentsTable(browser).check_if_comment_is_inactive(1)
 
 
-@TestType.smoke
+@Tag.from_name(tag_type='smoke')
 def test_inactivate_few_comments(browser: Browser) -> None:
     main_page = MainPage(browser)
     main_page.open()
