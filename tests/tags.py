@@ -17,3 +17,7 @@ class Tag(Enum):
             if next_tag.name == tag_type:
                 return next_tag.value
         raise TagError(f'{tag_type} is unknown!')
+
+    def __str__(self) -> str:
+        return self.name
+

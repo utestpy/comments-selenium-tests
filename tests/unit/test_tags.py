@@ -1,5 +1,6 @@
 from typing import Any
 import pytest
+from _pytest.mark import MarkDecorator
 from tests.tags import TagError, Tag
 
 
@@ -9,13 +10,13 @@ from tests.tags import TagError, Tag
     ('azazaza',),
     (None,),
 ])
-def test_type_error(tag_name: Any) -> None:
+def test_tag_error(tag_name: Any) -> None:
     with pytest.raises(TagError):
         Tag.from_name(tag_name)
 
 
 @Tag.from_name(tag_type='unittest')
-def test_count_types() -> None:
+def test_count_tags() -> None:
     assert len(Tag) == 2
 
 
@@ -24,5 +25,20 @@ def test_count_types() -> None:
     ('smoke', Tag.smoke),
     ('unittest', Tag.unittest),
 ])
-def test_type_from_name(tag_name: str, tag_type: Tag) -> None:
+def test_tag_from_name(tag_name: str, tag_type: Tag) -> None:
     assert Tag.from_name(tag_name) is tag_type.value
+
+
+@Tag.from_name(tag_type='unittest')
+def test_tag_name() -> None:
+    assert Tag.smoke.name == 'smoke'
+
+
+@Tag.from_name(tag_type='unittest')
+def test_tag_value() -> None:
+    assert isinstance(Tag.smoke.value, MarkDecorator)
+
+
+@Tag.from_name(tag_type='unittest')
+def test_tag_as_string() -> None:
+    assert str(Tag.smoke) == 'smoke'

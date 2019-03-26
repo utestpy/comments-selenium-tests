@@ -27,6 +27,7 @@ function all {
 function run_tests {
     local input="$1"
     [[ "${input}" == "all" ]] && all
+    [[ "${input}" == "unittest" ]] && unittest
     [[ "${input}" == "smoke" ]] && smoke
     [[ $# == 0 ]] && echo 'Please use either "unittests", "smoke" or "all" parameters to run tests!' && exit 1
     clear_trash
