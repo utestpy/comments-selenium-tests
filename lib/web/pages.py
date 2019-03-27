@@ -7,6 +7,7 @@ from lib.web.elements import (
     find_text_field,
     enter_comment_text,
 )
+from lib.web.urls import Url, WebUrl, Protocols
 
 
 def _move_to_comment_editing(browser: Browser, comment_to_select: int, value: str):
@@ -24,18 +25,18 @@ class BasePage(ABC):
 class MainPage(BasePage):
     def __init__(self, browser: Browser) -> None:
         self._browser = browser
-        self._url = "http://commentssprintone.azurewebsites.net"
+        self._url: Url = WebUrl(protocol=Protocols().http, path="commentssprintone.azurewebsites.net")
 
     def open(self) -> None:
-        self._browser.get(self._url)
+        self._browser.get(self._url.as_str())
 
-    def delete(self, *comment_numbers):
+    def delete(self, *comment_numbers: int) -> None:
         for comment in comment_numbers:
             CommentsTable(self._browser).select_comment(comment)
         self._browser.find_element_by_css_selector('input[value="Delete"').click()
         self._browser.find_element_by_css_selector("span.ui-button-text").click()
 
-    def select_action(self):
+    def select_action(self) -> SelectActionDropDown:
         return SelectActionDropDown(self._browser)
 
 
@@ -62,9 +63,8 @@ class NewCommentPage(BasePage):
 
 
 class DuplicateCommentPage(BasePage):
-    def __init__(self, browser: Browser, comment_to_duplicate) -> None:
+    def __init__(self, browser: Browser, comment_to_duplicate: int) -> None:
         self._browser = browser
-        self._url = "http://commentssprintone.azurewebsites.net/Editor/DuplicateComment"
         self.comment_to_duplicate = comment_to_duplicate
 
     def open(self) -> None:
@@ -82,7 +82,6 @@ class DuplicateCommentPage(BasePage):
 class EditCommentPage(BasePage):
     def __init__(self, browser: Browser, comment_to_edit: int) -> None:
         self._browser = browser
-        self._url = "http://commentssprintone.azurewebsites.net/Editor/EditComment"
         self.comment_to_edit = comment_to_edit
 
     def open(self) -> None:
