@@ -1,6 +1,7 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.remote.webelement import WebElement
 from lib.web.connection.browser import Browser
+from lib.web.urls import Url, AzureHomeUrl
 
 
 def save_and_return(browser: Browser) -> None:
@@ -18,9 +19,10 @@ def enter_comment_text(browser: Browser, comment_text: str) -> None:
 class CommentsTable:
     def __init__(self, browser: Browser) -> None:
         self._browser = browser
+        self._url: Url = AzureHomeUrl()
 
     def load_another_table(self, table_number) -> None:
-        self._browser.get(f"http://commentssprintone.azurewebsites.net/?page={table_number}")
+        self._browser.get(f"{self._url.as_str()}/?page={table_number}")
 
     def check_if_comment_is_present(self, comment_text: str) -> bool:
         try:

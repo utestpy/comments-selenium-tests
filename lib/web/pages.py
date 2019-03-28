@@ -7,7 +7,7 @@ from lib.web.elements import (
     find_text_field,
     enter_comment_text,
 )
-from lib.web.urls import Url, WebUrl, Protocols
+from lib.web.urls import Url, AzureHomeUrl
 
 
 def _move_to_comment_editing(browser: Browser, comment_to_select: int, value: str):
@@ -25,7 +25,7 @@ class BasePage(ABC):
 class MainPage(BasePage):
     def __init__(self, browser: Browser) -> None:
         self._browser = browser
-        self._url: Url = WebUrl(protocol=Protocols().http, path="commentssprintone.azurewebsites.net")
+        self._url: Url = AzureHomeUrl()
 
     def open(self) -> None:
         self._browser.get(self._url.as_str())

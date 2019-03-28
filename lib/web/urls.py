@@ -57,3 +57,11 @@ class WebUrl(Url):
         if not web_url.startswith(expected_set):
             raise UrlError(f'WEB url should start with {expected_set}!')
         return web_url
+
+
+class AzureHomeUrl(Url):
+    def __init__(self) -> None:
+        self._web_url: Url = WebUrl(protocol=Protocols().http, path="commentssprintone.azurewebsites.net")
+
+    def as_str(self) -> str:
+        return self._web_url.as_str()

@@ -1,5 +1,15 @@
 import pytest
-from lib.web.urls import UrlError, WebUrl, Protocol, Http, Https, Ftp, Protocols
+from lib.web.urls import (
+    UrlError,
+    WebUrl,
+    Protocol,
+    Http,
+    Https,
+    Ftp,
+    Protocols,
+    AzureHomeUrl,
+)
+
 from tests.tags import Tag
 
 
@@ -44,6 +54,10 @@ def test_expected_set_of_protocols(protocols: Protocols) -> None:
 ])
 def test_web_url(protocol: Protocol, as_str: str, url_path: str) -> None:
     assert WebUrl(protocol=protocol, path=_web_url_path).as_str() == url_path
+
+
+def test_azure_home_url() -> None:
+    assert AzureHomeUrl().as_str() == 'http://commentssprintone.azurewebsites.net'
 
 
 def test_errored_web_url() -> None:
