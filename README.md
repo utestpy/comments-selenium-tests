@@ -1,26 +1,26 @@
-# Selenium web ui tests with python POM model
-Contains web ui tests using POM most popular OOD pattern for Web UI automation using python programming language.
+# Comments WEB UI tests
+Contains python web ui tests of http://commentssprintone.azurewebsites.net using POM pattern.
 
 ## Run automated tests
 From the root directory of your shell run next command
 - Smoke tests
 ```bash
-➜ ./run-tests smoke
+./run-tests smoke
 ```
 - Unittest tests
 ```bash
-➜ ./run-tests unittest
+./run-tests unittest
 ```
 - All tests
 ```bash
-➜ ./run-tests all
+./run-tests all
 ```
 ### Auto-tests report
 ```bash
 ======================================================================================= test session starts =======================================================================================
 platform darwin -- Python 3.6.5, pytest-4.0.1, py-1.8.0, pluggy-0.9.0 -- /Users/vyah/.pyenv/versions/3.6.5/envs/python-tasks/bin/python
 cachedir: .pytest_cache
-rootdir: /Users/vyah/files/myprojects/comments-selenium-tests, inifile: pytest.ini
+rootdir: /comments-selenium-tests, inifile: pytest.ini
 collected 28 items
 
 tests/functional/tests_comments.py::test_new_comment PASSED                                                                                                                                 [  3%]
